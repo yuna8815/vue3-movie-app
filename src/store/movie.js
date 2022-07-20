@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { reject } from 'lodash';
 import _uniqBy from 'lodash/uniqBy'
 
 // movie modules
@@ -9,7 +8,7 @@ export default {
   // data!
   state: () => ({
     movies: [],
-    message: '',
+    message: 'Search for the movie title!',
     loading: false
   }),
   // computed!
@@ -39,6 +38,13 @@ export default {
     // Exam
     // async searchMovies(context, payload) {
     async searchMovies({ state, commit }, payload) {
+      // 사용자가 새로고침을 하거나 apply 버튼을 여러번 눌러 함수를 여러번 타지 않도록
+      if(state.loading) return
+
+      commit('updateState', {
+        message: '',
+        loading: true
+      })
       try {
         // const { title, type, number, year } = payload
 
@@ -73,6 +79,10 @@ export default {
         commit('updateState', {
           movies: [],
           message
+        })
+      } finally {
+        commit('updateState', {
+          loading: false
         })
       }
     }
