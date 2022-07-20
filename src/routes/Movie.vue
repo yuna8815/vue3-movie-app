@@ -11,11 +11,17 @@
         <div class="skeleton etc"></div>
       </div>
     </div>
+    <Loader :size="3" fixed :z-index="9" />
   </div>
 </template>
 
 <script>
+import Loader from '~/components/Loader'
+
 export default {
+  components: {
+    Loader
+  },
   created() {
     console.log(this.$route);
     this.$store.dispatch('movie/searchMovieWithId', {
