@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import Loader from '~/components/Loader'
 
 export default {
@@ -80,20 +81,29 @@ export default {
     }
   },
   computed: {
-    theMovie() {
-      return this.$store.state.movie.theMovie
-    },
-    loading() {
-      return this.$store.state.movie.loading
-    }
+    ...mapState('movie', [
+      'theMovie',
+      'loading'
+    ])
+    // theMovie() {
+    //   return this.$store.state.movie.theMovie
+    // },
+    // loading() {
+    //   return this.$store.state.movie.loading
+    // }
   },
   created() {
     // console.log(this.$route);
-    this.$store.dispatch('movie/searchMovieWithId', {
+    // this.$store.dispatch('movie/searchMovieWithId', {
+    this.searchMovieWithId({
       id: this.$route.params.id
     })
   },
   methods: {
+    // state만 사용하기를 권장
+    ...mapActions('movie', [
+      'searchMovieWithId'
+    ]),
     requestDiffSizeImage(url, size = 700) {
       if(!url || url === 'N/A') {
         this.imageLoading = false
