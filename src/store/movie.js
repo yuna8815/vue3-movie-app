@@ -81,7 +81,7 @@ export default {
             })
           }
         }
-      } catch(message) {
+      } catch({ message }) {
         commit('updateState', {
           movies: [],
           message
@@ -121,24 +121,27 @@ export default {
 }
 
 // 현재 파일 내부에서만 처리
-function _fetchMovie(payload) {
-  const { title, type, year, page, id } = payload
-  const OMDB_API_KEY = '7035c60c';
-  const url = id
-    ? `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${id}`
-    : `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type="${type}&y=${year}&page=${page}`
+async function _fetchMovie(payload) {
+  return await axios.post('/.netlify/functions/movie', payload)
 
-  return new Promise((resolve, reject) => {
-    axios.get(url)
-      .then(res => {
-        if(res.data.Error) {
-          reject(res.data.Error)
-          return
-        }
-        resolve(res)
-      })
-      .catch(err => {
-        reject(err.message)
-      })
-  })
+// functions/movie.js로 이동
+//   const { title, type, year, page, id } = payload
+//   const OMDB_API_KEY = '7035c60c';
+//   const url = id
+//     ? `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${id}`
+//     : `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type="${type}&y=${year}&page=${page}`
+
+//   return new Promise((resolve, reject) => {
+//     axios.get(url)
+//       .then(res => {
+//         if(res.data.Error) {
+//           reject(res.data.Error)
+//           return
+//         }
+//         resolve(res)
+//       })
+//       .catch(err => {
+//         reject(err.message)
+//       })
+//   })
 }
