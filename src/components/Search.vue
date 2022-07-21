@@ -85,11 +85,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~/scss/main';
+
 .container {
   display: flex;
 
   > * {
+    margin-right: 10px;
     font-size: 15px;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
   .selects {
@@ -97,15 +103,31 @@ export default {
 
     select {
       width: 120px;
-      margin-left: 10px;
+      & + select {margin-left: 10px;}
     }
   }
   .btn {
     width: 120px;
     height: 50px;
-    margin-left: 10px;
     font-weight: 700;
     flex-shrink: 0;
+  }
+  @include media-breakpoint-down(lg) {
+    display: block;
+    input {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+    .selects {
+      margin-right: 0;
+      margin-bottom: 20px;
+      select {
+        width: 100%;
+      }
+    }
+    .btn {
+      width: 100%;
+    }
   }
 }
 </style>
