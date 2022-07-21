@@ -8,6 +8,10 @@ export default createRouter({
   // Mode: Hash, History
   // https://google.com/#/search
   history: createWebHashHistory(),
+  // 페에지 이동 시 스크롤 위치가 0인 상태로 시작
+  scrollBehavior() {
+    return { top: 0 }
+  },
   // pages
   routes: [
     {
