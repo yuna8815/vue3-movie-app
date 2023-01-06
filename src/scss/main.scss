@@ -1,5 +1,5 @@
 // Default variable overrides
-$primary: #FDC000;
+$primary: #7B6EF6;
 $container-max-widths: (
   sm: 540px,
   md: 704px,
@@ -13,4 +13,9 @@ $container-max-widths: (
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/mixins";
 
-@import "../../node_modules/bootstrap/scss/bootstrap"
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+#app {
+  background: #121829;// url('~@/assets/Background.png') no-repeat center 0;
+  background-size: cover;
+}
